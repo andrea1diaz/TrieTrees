@@ -28,3 +28,31 @@ void TernarySearchTree::Read(){
 void TernarySearchTree::print(){
     root->print();
 }
+
+void TernarySearchTree::transform(string name){
+    fstream file(name);
+    fstream output(this->filename);
+    string data;
+    string key,key2;
+    while(!file.eof()){
+        key2.clear();
+        key.clear();
+        getline(file,data);
+        int i;
+        for(i=data.size()-1;i>0;i--){
+            if(data[i]=='.'){
+                i--;
+                break;
+            }
+        }
+        for(;i>0;i--){
+            if(data[i]=='/')break;
+            key+=data[i];
+            
+        }
+        for (int j=key.size()-1;j>=0;j--){
+            key2+=key[j];
+        }
+    }   
+
+}

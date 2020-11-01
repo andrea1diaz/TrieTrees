@@ -14,4 +14,5 @@ public:
     vector<string> find(string name);
     void Read();
     void print();
+    void transform(string name);
 };
