@@ -1,7 +1,6 @@
 #include "treeNode.h"
 bool hasChildren(TreeNode *data);
 void TreeNode::insert(string name,int pos,int address){
-    cout<<"name[pos] : "<< name[pos]<<endl;
     if(pos ==name.size()){
         this->isTerminal =true;
         this->positions.push_back(address);
@@ -121,30 +120,30 @@ Choices TreeNode::Delete(string name, int pos,string ruta,string filename){
     if(this->value =='\n'){
         return NOT_FOUND ;
     }
-    TreeNode* recursive = nullptr;
+    int index=-1;
     Choices returned;
     if(name[pos]==this->value){
-        recursive = this->children[1];
-        if(recursive==nullptr)return NOT_FOUND;
-        returned= recursive->Delete(name,pos+1,ruta,filename);
+        index=1;
+        if(this->children[1]==nullptr)return NOT_FOUND;
+        returned= this->children[1]->Delete(name,pos+1,ruta,filename);
     }else if (name[pos]>=this->value){
-        recursive = this->children[2];
-        if(recursive==nullptr)return NOT_FOUND;
-        returned= recursive->Delete(name,pos,ruta,filename);
+        index=2;
+        if(this->children[2]==nullptr)return NOT_FOUND;
+        returned= this->children[2]->Delete(name,pos,ruta,filename);
     }else{
-        recursive = this->children[0];
-        if(recursive==nullptr)return NOT_FOUND;
-        returned= recursive->Delete(name,pos,ruta,filename);
+        index=0;
+        
+        if(this->children[0]==nullptr)return NOT_FOUND;
+        returned= this->children[0]->Delete(name,pos,ruta,filename);
     }
     if(returned == DELETED_RECURSIVE){
-        TreeNode *temp =recursive;
-        delete temp;
-        recursive=nullptr;
+        delete this->children[index];
+        this->children[index]=nullptr;
         if (!hasChildren(this)){
             return DELETED_RECURSIVE;
         }
     }
-    return DELETED_SAFELY;
+    return NOT_FOUND;
 
 
     

@@ -5,7 +5,7 @@ void TernarySearchTree::insert(string name,int address){
 }
 void TernarySearchTree::Delete(string name){
     //process ruta
-    cout<<root->Delete(name,0,"/home/cesar21456/"+name+".jpg",this->filename)<<endl;
+    root->Delete(name,0,"/home/cesar21456/"+name+".jpg",this->filename);
 }
 vector<string> TernarySearchTree::find(string name){
     return root->find(name,0,this->filename);
@@ -19,7 +19,6 @@ void TernarySearchTree::Read(){
         getline(imput,key,' ');
         getline(imput,value);
         this->insert(key,address);
-        cout<<"paso"<<endl;
     }
     root->print();
     imput.close();
