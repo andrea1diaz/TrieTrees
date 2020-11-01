@@ -1,0 +1,3 @@
+casa /home/cesar21456/casa.jpg
+telefono /home/cesar21456/telefono.jpg
+casa /home/casa.jpg
