@@ -1,3 +1,4 @@
-\documents\folder1\casa.mp3
-\documents\casa.mp3
-\documents\castillo.mp3
+/documents/folder1/casa.mp3
+/documents/casa.mp3
+/casa.mp3
+/castillo.mp3

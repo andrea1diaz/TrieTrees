@@ -1,24 +1,16 @@
 #include <iostream>
+#include <fstream>
 #include "Trie.h"
 
 int main() {
-    std::string filename = "data.txt";
-    Trie trie(filename);
+    Trie trie("data.txt");
     auto paths = trie.find("casa.mp3");
-    for (const auto& i : paths) {
-        std:: cout << i << "\n";
-    }
-    std::cout << "\n\n";
-    trie.remove("casa.mp3", R"(\documents\folder1\casa.mp3)");
-    paths = trie.find("casa.mp3");
-    for (const auto& i : paths) {
-        std:: cout << i << "\n";
-    }
-    std::cout << "\n\n";
-    trie.remove("casa.mp3");
-    paths = trie.find("casa.mp3");
-    for (const auto& i : paths) {
-        std:: cout << i << "\n";
+    std::ifstream file("data.txt");
+    for (auto pos : paths) {
+        file.seekg(pos);
+        std::string path;
+        file >> path;
+        std::cout << path << "\n";
     }
     return 0;
 }
