@@ -10,9 +10,8 @@ public:
 
     };
     void insert(string name,int address);
-    void Delete(string name);
+    void Delete(string fullname, string name);
     vector<string> find(string name);
-    void Read();
     void print();
-    void transform(string name);
+    void read();
 };

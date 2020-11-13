@@ -59,7 +59,6 @@ vector<string> TreeNode::find(string name,int pos,string filename){
             string key,data;
             for(auto it:this->positions){
                 file.seekg(it);
-                getline(file,key,' ');
                 getline(file,data);
                 retorno.push_back(data);
             }
@@ -97,7 +96,6 @@ Choices TreeNode::Delete(string name, int pos,string ruta,string filename){
             string key,data;
             for(auto it = this->positions.begin();it!=this->positions.end();it++){
                 file.seekg(*it);
-                getline(file,key,' ');
                 getline(file,data);
                 if(data==ruta){
                     this->positions.erase(it);
