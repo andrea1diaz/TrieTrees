@@ -9,7 +9,7 @@ class RadixTrieTree {
 public:
     RadixTrieTree();
 
-    bool insert(std::string, std::string);
+    bool insert(std::string, int);
     void search(std::string);
     void remove(std::string);
     void print();
@@ -20,11 +20,11 @@ private:
 
         bool ending;
 
-        std::list<std::string> addr;
+        std::list<int> addr;
         Node* children[256];
         std::vector<Node*> child;
 
-        Node(std::string value_, std::string addr_) : value{value_} { addr.push_back(addr_); ending = true; }
+        Node(std::string value_, int addr_) : value{value_} { addr.push_back(addr_); ending = true; }
         Node(std::string value_) : value{value_} {}
 
     };

@@ -5,8 +5,12 @@
 RadixTrieTree::RadixTrieTree() {
 }
 
-bool RadixTrieTree::insert(std::string word, std::string address) {
-    if (find(word)) return false;
+bool RadixTrieTree::insert(std::string word, int address) {
+    Node *found = find(0, word, root[word[0]]);
+    if (found) {
+        found->addr.push_back(address);
+        return false;
+    }
 
     Node *new_node = new Node (word, address);
 
