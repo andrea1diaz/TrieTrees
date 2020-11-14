@@ -1,6 +1,7 @@
 #include "Trie.h"
 
 #include <fstream>
+#include <algorithm>
 
 Trie::Trie() {
     root = new TrieNode();
@@ -50,6 +51,17 @@ void Trie::remove(const std::string& word, int n_addr) {
     removeRec(root, word, 0, n_addr);
 }
 
+void findChildren(TrieNode* node, std::vector<int>& addr) {
+    if (node->n_children > 0) {
+        for (auto &child : node->children) {
+            if (child) {
+                addr.insert(addr.end(), child->address.begin(), child->address.end());
+                findChildren(child, addr);
+            }
+        }
+    }
+}
+
 std::vector<int> Trie::find(const std::string& word) {
     auto node = root;
     for (char c : word) {
@@ -58,7 +70,10 @@ std::vector<int> Trie::find(const std::string& word) {
         }
         node = node->children[c];
     }
-    return node->address;
+    std::vector<int> addr = node->address;
+    findChildren(node, addr);
+    std::sort(addr.begin(), addr.end());
+    return addr;
 }
 
 Trie::Trie(const std::string& filename) {

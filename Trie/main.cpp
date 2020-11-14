@@ -4,13 +4,14 @@
 
 int main() {
     Trie trie("data.txt");
-    auto paths = trie.find("casa.mp3");
+    auto paths = trie.find("ca");
     std::ifstream file("data.txt");
     for (auto pos : paths) {
         file.seekg(pos);
         std::string path;
         file >> path;
-        std::cout << path << "\n";
+        std::cout << path << std::endl;
     }
+    
     return 0;
 }

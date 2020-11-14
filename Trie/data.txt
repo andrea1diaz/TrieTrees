@@ -2,3 +2,5 @@
 /documents/casa.mp3
 /casa.mp3
 /castillo.mp3
+/cartera.mp3
+/cartucho.mp3
