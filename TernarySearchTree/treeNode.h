@@ -22,6 +22,7 @@ class TreeNode{
     TreeNode(char Value):value(Value),isTerminal(false){};
     void insert(string name,int pos,int address);
     void print();
-    vector<string> find(string name,int pos,string filename);
+    TreeNode* find(string name,int pos,string filename);
     Choices Delete(string name, int pos,string ruta,string filename);
+    
 };
