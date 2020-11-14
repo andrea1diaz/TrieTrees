@@ -1,32 +1,39 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 #include <string>
 #include <list>
 
 class RadixTrieTree {
 public:
-	RadixTrieTree();
+    RadixTrieTree();
 
-	bool insert(std::string, std::string);
-	bool find(std::string);
-	void remove(std::string);
-
+    bool insert(std::string, std::string);
+    void search(std::string);
+    void remove(std::string);
+    void print();
 
 private:
-	struct Node {
-		std::string data;
+    struct Node {
+        std::string value;
 
-		bool ending;
+        bool ending;
 
-		std::list<std::string> addr;
-		std::vector<Node> children[256];
-	};
+        std::list<std::string> addr;
+        Node* children[256];
+        std::vector<Node*> child;
 
-	Node root;
+        Node(std::string value_, std::string addr_) : value{value_} { addr.push_back(addr_); ending = true; }
+        Node(std::string value_) : value{value_} {}
 
-	Node insert (Node, Node);
-	void find (int i, std::string word, std::vector<Node> node);
-	int prefix (std::string, std::string);
-	void split (Node, int);
+    };
+
+    Node *root[256];
+
+    Node* insert (Node*, Node*, int);
+    bool find(std::string);
+    Node* find (int, std::string, Node*);
+    int prefix (std::string, std::string);
+    Node* split (Node*, int, Node*);
 };
