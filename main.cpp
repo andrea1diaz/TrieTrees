@@ -5,7 +5,7 @@
 #include "RadixTrie/radix_tree.h"
 
 int main() {
-    Trie trie("output.txt");
+    /*Trie trie("output.txt");
     auto paths = trie.find("ca");
     std::ifstream file("output.txt");
     for (auto pos : paths) {
@@ -13,7 +13,7 @@ int main() {
         std::string path;
         file >> path;
         std::cout << path << std::endl;
-    }
+    }*/
 
     RadixTrieTree rt("output.txt");
     //TernarySearchTree tst("output.txt");

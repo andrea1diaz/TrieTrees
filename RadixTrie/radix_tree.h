@@ -33,7 +33,7 @@ private:
 
     };
 
-    Node *root[256];
+    Node *root = {0};
 
     Node* insert (Node*, Node*, int);
     bool find(std::string);

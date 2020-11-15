@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/RadixTrie/radix_tree.cpp
+radix_tree.h
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/RadixTrie/radix_tree.h
+fstream
+-
+vector
+-
+
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/RadixTrie/radix_tree.h
+iostream
+-
+vector
+-
+string
+-
+list
+-
+
