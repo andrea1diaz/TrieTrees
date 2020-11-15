@@ -12,11 +12,12 @@ int main() {
 
     std::ifstream queries("queries.txt");
     std::ifstream file("output.txt");
-    std::string query;
+    auto addr = rt.search("face.jpeg");
+    /*std::string query;
     while (queries >> query) {
         rt.search(query);
     }
-    file.close();
+    file.close();*/
 
     return 0;
 }

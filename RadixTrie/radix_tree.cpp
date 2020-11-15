@@ -113,7 +113,7 @@ RadixTrieTree::Node* RadixTrieTree::split (Node *node, int i, Node *newnode) {
 }
 
 RadixTrieTree::Node*  RadixTrieTree::search (std::string word) {
-    return find(0, word, root->children[word[0]]);
+    return find(0, word, root->children[word[0]], 1);
 }
 
 std::vector<int> RadixTrieTree::search_prefix (std::string word) {
@@ -128,24 +128,21 @@ bool RadixTrieTree::find (std::string word) {
     return false;
 }
 
-RadixTrieTree::Node* RadixTrieTree::find (int i, std::string word, Node *node) {
+RadixTrieTree::Node* RadixTrieTree::find (int i, std::string word, Node *node, bool search) {
     if (!node) return nullptr;
-    if (i >= 255) return nullptr;
 
-    auto curr = node->children[word[0]];
+    auto current = node->children[word[search]];
 
-    Node *current;
-    if (curr == nullptr) current = node;
-    else {
-        if (curr->child.size() > 0) current = curr->child[i];
-        else current = curr;
-    }
+    if (current == nullptr) current = node;
 
+    if (search) word.erase(word.begin(), word.begin() + 1);
     int founded_count = prefix (current->value, word);
 
     if (founded_count == 0) return find(++i, word, node);
 
     if (founded_count == word.size()) return node;
+
+    if (search) node = current;
 
     if (founded_count == node->value.size()) {
         word.erase(word.begin(), word.begin() + founded_count);
