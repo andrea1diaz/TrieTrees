@@ -120,8 +120,9 @@ void RadixTrieTree::search (std::string word) {
     else std::cout << "not found\n";
 }
 
-void RadixTrieTree::search_prefix (std::string word) {
-    find_prefix(0, word, root->children[word[0]]);
+std::vector<int> RadixTrieTree::search_prefix (std::string word) {
+    std::vector<int> empt;
+    return find_prefix(0, word, root->children[word[0]], empt);
 }
 
 bool RadixTrieTree::find (std::string word) {
@@ -154,9 +155,8 @@ RadixTrieTree::Node* RadixTrieTree::find (int i, std::string word, Node *node) {
 
     return nullptr;
 }
-
-bool RadixTrieTree::find_prefix (int i, std::string word, Node *node) {
-    if (!node) return false;
+std::vector<int> RadixTrieTree::find_prefix (int i, std::string word, Node *node, std::vector<int> ans) {
+    if (!node) return ans;
 
     auto curr = node->children[word[0]];
 
@@ -167,30 +167,27 @@ bool RadixTrieTree::find_prefix (int i, std::string word, Node *node) {
     int founded_count = prefix (current->value, word);
 
     if (founded_count == 0) {
-        find_prefix(++i, word, node);
-        return true;
+        return find_prefix(++i, word, node, ans);
     }
 
-    if (founded_count == word.size()) return node;
+    if (founded_count == word.size()) return ans;
 
     if (founded_count == node->value.size()) {
         word.erase(word.begin(), word.begin() + founded_count);
-        find_node(node->children[word[0]]);
-        return true;
+        find_node(node->children[word[0]], &ans);
+        return ans;
     }
 
-    return false;
+    return ans;
 }
 
-void RadixTrieTree::find_node (Node *node) {
+void RadixTrieTree::find_node (Node *node, std::vector<int> *addrs) {
     if (!node) return;
 
-    if (node->addr.size() > 0) {
-        for (auto i : node->addr) std::cout << i << '\n';
-    }
+    if (node->addr.size() > 0) for (auto i : node->addr) addrs->push_back(i);
 
-    for (int j = 0; j < node->child.size(); j++)
-        find_node(node->child[j]);
+    for (int j = 0; j < node->child.size(); ++j)
+        find_node(node->child[j], addrs);
 }
 
 
