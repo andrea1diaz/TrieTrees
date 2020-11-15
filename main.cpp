@@ -15,9 +15,9 @@ int main() {
         std::cout << path << std::endl;
     }
 
-    RadixTrieTree rt();
-    TernarySearchTree tst("output.txt");
-    tst.read();
+    RadixTrieTree rt("output.txt");
+    //TernarySearchTree tst("output.txt");
+    //tst.read();
 
     return 0;
 }

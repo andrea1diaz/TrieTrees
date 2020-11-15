@@ -1,8 +1,21 @@
 #include "radix_tree.h"
-
+#include <fstream>
 #include <vector>
 
-RadixTrieTree::RadixTrieTree() {
+RadixTrieTree::RadixTrieTree(const std::string &filename) {
+    std::ifstream file(filename, std::ios::in);
+    int path = 0;
+    while (!file.eof()) {
+        std::string word;
+        file >> word;
+        size_t size = word.length()+1;
+        int pos;
+        while ((pos = word.find('/')) != std::string::npos) {
+            word.erase(0, pos + 1);
+        }
+        insert(word, path);
+        path += size;
+    }
 }
 
 bool RadixTrieTree::insert(std::string word, int address) {
@@ -55,8 +68,10 @@ RadixTrieTree::Node* RadixTrieTree::insert (Node *new_node, Node *node, int i) {
 
         new_node->value.erase(new_node->value.begin(), new_node->value.begin() + insert_count);
 
-        if (node->children[new_node->value[0]] == nullptr) //the node doesnt have children
+        if (node->children[new_node->value[0]] == nullptr) {//the node doesnt have children
             node->children[new_node->value[0]] = new_node;
+            node->child.push_back(new_node);
+        }
 
         else {
             Node *tmp;
@@ -86,6 +101,12 @@ RadixTrieTree::Node* RadixTrieTree::split (Node *node, int i, Node *newnode) {
     for (int i = 0; i < 256; ++i) n_node->children[i] = node->children[i];
     for (int i = 0; i < 256; ++i) node->children[i] = nullptr;
 
+    n_node->child = node->child;
+    node->child.clear();
+    node->child.push_back(n_node);
+    n_node->addr = node->addr;
+    node->addr.clear();
+
     if (node->children[n_node->value[0]] == nullptr) node->children[n_node->value[0]] = n_node;
     else node->children[n_node->value[0]]->child.push_back(n_node);
 
@@ -95,11 +116,15 @@ RadixTrieTree::Node* RadixTrieTree::split (Node *node, int i, Node *newnode) {
 void RadixTrieTree::search (std::string word) {
     auto found = find(0, word, root[word[0]]);
 
-    if (found != nullptr && found->ending) {
+    if (found != nullptr) {
         for (auto i : found->addr) std::cout << i << '\n';
     }
 
     else std::cout << "not found\n";
+}
+
+void RadixTrieTree::search_prefix (std::string word) {
+    find_prefix(0, word, root[word[0]]);
 }
 
 bool RadixTrieTree::find (std::string word) {
@@ -130,6 +155,44 @@ RadixTrieTree::Node* RadixTrieTree::find (int i, std::string word, Node *node) {
     }
 
     return nullptr;
+}
+
+bool RadixTrieTree::find_prefix (int i, std::string word, Node *node) {
+    if (!node) return false;
+
+    auto curr = node->children[word[0]];
+
+    Node *current;
+    if (curr == nullptr) current = node;
+    else current = curr->child[i];
+
+    int founded_count = prefix (current->value, word);
+
+    if (founded_count == 0) {
+        find_prefix(++i, word, node);
+        return true;
+    }
+
+    if (founded_count == word.size()) return node;
+
+    if (founded_count == node->value.size()) {
+        word.erase(word.begin(), word.begin() + founded_count);
+        find_node(node->children[word[0]]);
+        return true;
+    }
+
+    return false;
+}
+
+void RadixTrieTree::find_node (Node *node) {
+    if (!node) return;
+
+    if (node->addr.size() > 0) {
+        for (auto i : node->addr) std::cout << i << '\n';
+    }
+
+    for (int j = 0; j < node->child.size(); j++)
+        find_node(node->child[j]);
 }
 
 
