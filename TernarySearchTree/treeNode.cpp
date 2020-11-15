@@ -2,30 +2,34 @@
 bool hasChildren(TreeNode *data);
 void TreeNode::insert(string name,int pos,int address){
     if(pos ==name.size()){
+        
         this->isTerminal =true;
         this->positions.push_back(address);
         return;
     }
-    if (this->value=='\n'){
+    if (this->value=='\n'){        
         this->value = name[pos];
     }
-    TreeNode** recursive = nullptr;
-    if(name[pos]==this->value){
-        recursive = &this->children[1];
-        if(*recursive==nullptr){
-            *recursive = new TreeNode('\n');
-        }
-        (*recursive)->insert(name,pos+1,address);
 
-    }else if (name[pos]>=this->value){
-        recursive = &this->children[2];
+    TreeNode** recursive = nullptr;
+    
+    if(name[pos]==this->value){
+        recursive = &(this->children[1]);
+        if((*recursive)==nullptr){
+            (*recursive) = new TreeNode('\n');
+        }
+        (*recursive)->insert(name,pos+1,address);        
+        return;
+
+    }else if (name[pos]>this->value){
+        recursive = &(this->children[2]);
         if(*recursive==nullptr){
             *recursive = new TreeNode('\n');
         }
         (*recursive)->insert(name,pos,address);
-
+        return;
     }else{
-        recursive = &this->children[0];
+        recursive = &(this->children[0]);
         if(*recursive==nullptr){
             *recursive = new TreeNode('\n');
         }
@@ -120,7 +124,6 @@ Choices TreeNode::Delete(string name, int pos,string ruta,string filename){
         returned= this->children[2]->Delete(name,pos,ruta,filename);
     }else{
         index=0;
-        
         if(this->children[0]==nullptr)return NOT_FOUND;
         returned= this->children[0]->Delete(name,pos,ruta,filename);
     }

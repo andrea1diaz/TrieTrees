@@ -11,7 +11,7 @@ public:
 
     bool insert(std::string, int);
     void search(std::string);
-    void search_prefix(std::string);
+    std::vector<int> search_prefix(std::string);
 
 private:
     struct Node {
@@ -38,8 +38,8 @@ private:
     Node* insert (Node*, Node*, int);
     bool find(std::string);
     Node* find (int, std::string, Node*);
-    bool find_prefix (int, std::string, Node*);
-    void find_node (Node*);
+    std::vector<int> find_prefix (int, std::string, Node*, std::vector<int>);
+    void find_node (Node*, std::vector<int>*);
     int prefix (std::string, std::string);
     Node* split (Node*, int, Node*);
 };
