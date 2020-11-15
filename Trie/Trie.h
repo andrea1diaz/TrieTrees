@@ -15,6 +15,7 @@ public:
     void insert(const std::string& word, int address);
     void remove(const std::string& word);
     void remove(const std::string& word, int n_addr);
+    size_t getRAM();
     std::vector<int> find(const std::string& word);
 };
 

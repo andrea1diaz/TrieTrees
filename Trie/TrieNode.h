@@ -10,6 +10,7 @@ struct TrieNode {
     std::vector<int> address;
 
     TrieNode();
+    unsigned int getRAM();
 };
 
 

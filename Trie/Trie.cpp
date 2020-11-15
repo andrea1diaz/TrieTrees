@@ -94,4 +94,19 @@ Trie::Trie(const std::string& filename) {
 
 }
 
+size_t getRam(TrieNode* node) {
+    if (node) {
+        size_t size = node->getRAM();
+        for (auto &child : node->children) {
+            size += getRam(child);
+        }
+        return size;
+    }
+    return 0;
+}
+
+size_t Trie::getRAM() {
+    return getRam(root);
+}
+
 
