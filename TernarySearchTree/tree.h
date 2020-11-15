@@ -9,10 +9,10 @@ public:
         root = new TreeNode('\n');
 
     };
-    void insert(string name,int address);
+    double insert(string name,int address);
     void Delete(string fullname, string name);
     void print();
     void read();
-    void find_usages(string name);
-    void find_next(string name);
+    double find_usages(string name);
+    double find_next(string name);
 };

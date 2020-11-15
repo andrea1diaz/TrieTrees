@@ -1,9 +1,9 @@
 #include <iostream> 
 #include <vector>
 #include <fstream>
-
+#include <time.h>
+#include <chrono>
 using namespace std;
-
 enum Choices{
     DELETED_SAFELY,
     DELETED_RECURSIVE,
@@ -15,7 +15,7 @@ enum Choices{
 class TreeNode{
     public:
     char value;
-    TreeNode* children[3];
+    TreeNode* children[3]={nullptr,nullptr,nullptr};
     vector<int> positions;
     bool isTerminal;
 
