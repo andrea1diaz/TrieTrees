@@ -19,6 +19,8 @@ RadixTrieTree::RadixTrieTree(const std::string &filename) {
         insert(word, path);
         path += size;
     }
+
+    //std::cout << getRam(root) << '\n';
 }
 
 bool RadixTrieTree::insert(std::string word, int address) {
@@ -110,14 +112,8 @@ RadixTrieTree::Node* RadixTrieTree::split (Node *node, int i, Node *newnode) {
     return newnode;
 }
 
-void RadixTrieTree::search (std::string word) {
-    auto found = find(0, word, root->children[word[0]]);
-
-    /*if (found != nullptr) {
-        for (auto i : found->addr) std::cout << i << '\n';
-    }
-
-    else std::cout << "not found\n"; */
+RadixTrieTree::Node*  RadixTrieTree::search (std::string word) {
+    return find(0, word, root->children[word[0]]);
 }
 
 std::vector<int> RadixTrieTree::search_prefix (std::string word) {
@@ -203,3 +199,13 @@ int RadixTrieTree::prefix (std::string node, std::string word) {
     return node.size();
 }
 
+size_t RadixTrieTree::getRam(Node* node) {
+    if (node != nullptr) {
+        size_t size = node->getRAM();
+        for (auto &child : node->child) {
+            size += getRam(child);
+        }
+        return size;
+    }
+    return 0;
+}

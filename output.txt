@@ -323,4 +323,4 @@
 /Users/andreadiaz/Library/Mobile_Documents/com~apple~CloudDocs/utec/statistics/practicando_para_L4.Rmd
 /Users/andreadiaz/Library/Mobile_Documents/com~apple~CloudDocs/utec/statistics/practicando_para_L4.nb.html
 /Users/andreadiaz/Library/Mobile_Documents/com~apple~CloudDocs/utec/statistics/practicando-para-L4.html
-/Users/andreadiaz/Library/Mobile_Documents/com~apple~CloudDocs/utec/testers/hola.cpp
+/Users/andreadiaz/Library/Mobile_Documents/com~apple~CloudDocs/utec/testers/hola.cp
