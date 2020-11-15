@@ -24,3 +24,37 @@ string
 list
 -
 
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/TernarySearchTree/tree.h
+treeNode.h
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/TernarySearchTree/treeNode.h
+
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/TernarySearchTree/treeNode.h
+iostream
+-
+vector
+-
+fstream
+-
+
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/Trie/Trie.h
+string
+-
+TrieNode.h
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/Trie/TrieNode.h
+
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/Trie/TrieNode.h
+vector
+-
+
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/main.cpp
+iostream
+-
+fstream
+-
+Trie/Trie.h
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/Trie/Trie.h
+TernarySearchTree/tree.h
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/TernarySearchTree/tree.h
+RadixTrie/radix_tree.h
+/Users/andreadiaz/Library/Mobile Documents/com~apple~CloudDocs/utec/EDA/TrieTrees/RadixTrie/radix_tree.h
+
