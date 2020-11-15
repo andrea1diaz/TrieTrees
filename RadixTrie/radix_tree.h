@@ -7,12 +7,11 @@
 
 class RadixTrieTree {
 public:
-    RadixTrieTree();
+    RadixTrieTree(const std::string &filename);
 
-    bool insert(std::string, std::string);
+    bool insert(std::string, int);
     void search(std::string);
-    void remove(std::string);
-    void print();
+    void search_prefix(std::string);
 
 private:
     struct Node {
@@ -20,20 +19,27 @@ private:
 
         bool ending;
 
-        std::list<std::string> addr;
+        std::list<int> addr;
         Node* children[256];
         std::vector<Node*> child;
 
-        Node(std::string value_, std::string addr_) : value{value_} { addr.push_back(addr_); ending = true; }
-        Node(std::string value_) : value{value_} {}
+        Node() { for (int i = 0; i < 256; i++) children[i] = nullptr; }
+
+        Node(std::string value_, int addr_) : value{value_} {
+            addr.push_back(addr_); ending = true;
+            for (int i = 0; i < 256; i++) children[i] = nullptr;
+        }
+        Node(std::string value_) : value{value_} { for (int i = 0; i < 256; i++) children[i] = nullptr; }
 
     };
 
-    Node *root[256];
+    Node *root = {0};
 
     Node* insert (Node*, Node*, int);
     bool find(std::string);
     Node* find (int, std::string, Node*);
+    bool find_prefix (int, std::string, Node*);
+    void find_node (Node*);
     int prefix (std::string, std::string);
     Node* split (Node*, int, Node*);
 };
