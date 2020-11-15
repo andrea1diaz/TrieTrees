@@ -147,7 +147,7 @@ RadixTrieTree::Node* RadixTrieTree::find (int i, std::string word, Node *node) {
 
     if (founded_count == word.size()) return node;
 
-    if (founded_count == node->value.size()) {
+    if (founded_count == node->value.size() && word.size() >= founded_count) {
         word.erase(word.begin(), word.begin() + founded_count);
         return find(0, word, node->children[word[0]]);
     }
