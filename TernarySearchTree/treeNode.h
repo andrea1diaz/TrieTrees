@@ -24,5 +24,7 @@ class TreeNode{
     void print();
     TreeNode* find(string name,int pos,string filename);
     Choices Delete(string name, int pos,string ruta,string filename);
-    
+    long int size(){
+        return 1+3*sizeof(TreeNode*)+1 +sizeof(int)*positions.size();
+    }
 };

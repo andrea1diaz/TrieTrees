@@ -2,7 +2,7 @@
 class TernarySearchTree{
     TreeNode *root;
     string filename;
-    void dfs(TreeNode* root);
+    double dfs(TreeNode* root);
 public:
     TernarySearchTree(string name){
         this->filename=name;
@@ -12,7 +12,8 @@ public:
     double insert(string name,int address);
     void Delete(string fullname, string name);
     void print();
-    void read();
+    double read();
     double find_usages(string name);
     double find_next(string name);
+    long  size();
 };
