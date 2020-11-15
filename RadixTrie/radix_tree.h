@@ -35,7 +35,7 @@ private:
 
     Node* insert (Node*, Node*, int);
     bool find(std::string);
-    Node* find (int, std::string, Node*);
+    Node* find (int, std::string, Node*, bool t = 0);
     std::vector<int> find_prefix (int, std::string, Node*, std::vector<int>);
     void find_node (Node*, std::vector<int>*);
     int prefix (std::string, std::string);

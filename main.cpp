@@ -40,6 +40,7 @@ int main() {
     RadixTrieTree rt("output.txt");
     queries.open("queries.txt");
     file.open("output.txt");
+    auto node = rt.search("face.jpeg");
     while (queries >> query) {
         auto node = rt.search(query);
         if (!node) continue;
