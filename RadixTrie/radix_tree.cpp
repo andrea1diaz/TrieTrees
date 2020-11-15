@@ -113,11 +113,11 @@ RadixTrieTree::Node* RadixTrieTree::split (Node *node, int i, Node *newnode) {
 void RadixTrieTree::search (std::string word) {
     auto found = find(0, word, root->children[word[0]]);
 
-    if (found != nullptr) {
+    /*if (found != nullptr) {
         for (auto i : found->addr) std::cout << i << '\n';
     }
 
-    else std::cout << "not found\n";
+    else std::cout << "not found\n"; */
 }
 
 std::vector<int> RadixTrieTree::search_prefix (std::string word) {
@@ -140,7 +140,10 @@ RadixTrieTree::Node* RadixTrieTree::find (int i, std::string word, Node *node) {
 
     Node *current;
     if (curr == nullptr) current = node;
-    else current = curr->child[i];
+    else {
+        if (curr->child.size() > 0) current = curr->child[i];
+        else current = curr;
+    }
 
     int founded_count = prefix (current->value, word);
 
