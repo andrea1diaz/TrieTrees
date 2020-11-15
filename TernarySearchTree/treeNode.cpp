@@ -50,23 +50,12 @@ void TreeNode::print(){
 
 
 
-vector<string> TreeNode::find(string name,int pos,string filename){
-    vector<string> retorno;
+TreeNode* TreeNode::find(string name,int pos,string filename){
     if (pos == name.size() ){
-        if (this->isTerminal){
-            //read data            
-            fstream file(filename,ios::in |ios::out );
-            string key,data;
-            for(auto it:this->positions){
-                file.seekg(it);
-                getline(file,data);
-                retorno.push_back(data);
-            }
-        }
-        return retorno;
+        return this;
     }
     if(this->value =='\n'){
-        return retorno;
+        return nullptr;
     }
     TreeNode* recursive = nullptr;
     if(name[pos]==this->value){
@@ -82,9 +71,10 @@ vector<string> TreeNode::find(string name,int pos,string filename){
         if(recursive!=nullptr)return recursive->find(name,pos,filename);
 
     }
-    return retorno;
+    return nullptr;
 
 }
+
 
 
 
@@ -148,63 +138,6 @@ Choices TreeNode::Delete(string name, int pos,string ruta,string filename){
     //if(recursive!=nullptr)return recursive->Delete(name,pos+1);
 }
 
-/*
-Choices TreeNode::Delete(string name, int pos,string ruta,string filename){
-    if (pos == name.size() ){
-        if (this->isTerminal){
-            //delete data            
-            fstream file(filename,ios::in |ios::out );
-            string key,data;
-            for(auto it = this->positions.begin();it!=this->positions.end();it++){
-                file.seekg(*it);
-                getline(file,key,' ');
-                getline(file,data);
-                if(data==ruta){
-                    this->positions.erase(it);
-                    break; 
-                }
-            }
-            if(this->positions.empty()){
-                if(hasChildren(this)){
-                    this->isTerminal=false;
-                    return DELETED_SAFELY;
-                }else{
-                    return DELETED_RECURSIVE;
-                }
-                
-            }else{
-                return HAS_MORE_POSITIONS;
-            }
-        }
-    }
-    if(this->value =='\n'){
-        return NOT_FOUND ;
-    }
-    TreeNode* recursive = nullptr;
-    if(name[pos]==this->value){
-        recursive = this->children[1];
-    }else if (name[pos]>=this->value){
-        recursive = this->children[2];
-    }else{
-        recursive = this->children[0];
-    }
-    if(recursive==nullptr)return NOT_FOUND;
-    switch (recursive->Delete(name,pos+1,ruta,filename)){
-        case DELETED_SAFELY:break;
-        case HAS_MORE_POSITIONS:break;
-        case DELETED_RECURSIVE:{
-            delete recursive;
-            if (!hasChildren(this)){
-                return DELETED_RECURSIVE;
-            }
-            
-        }
-        case NOT_FOUND:break;
-    }
-    
-    //if(recursive!=nullptr)return recursive->Delete(name,pos+1);
-}
-*/
 bool hasChildren(TreeNode *data){
     for(int i=0;i<3;i++){
         if(data->children[i]!=nullptr){

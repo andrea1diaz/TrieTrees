@@ -7,10 +7,49 @@ void TernarySearchTree::Delete(string fullname,string name){
     //process ruta
     root->Delete(name,0,"faces94/female/mbutle/"+name+".jpg",this->filename);
 }
-vector<string> TernarySearchTree::find(string name){
-    return root->find(name,0,this->filename);
+
+void TernarySearchTree::find_usages(string name){
+    auto aux =root->find(name,0,this->filename);
+    if(aux){
+        if(aux->positions.size()!=0){
+            fstream file(filename,ios::in |ios::out );
+            for(auto it:aux->positions){
+                //read data            
+                string data;
+                file.seekg(it);
+                getline(file,data);
+                cout<<data<<" ";
+            }
+        }else{
+            cout<<"no se encontro";
+        }
+        cout<<endl;
+    }
 }
 
+void TernarySearchTree::dfs(TreeNode* root){
+    if(!root)return;
+    if (root->isTerminal){
+        fstream file(filename,ios::in |ios::out );
+        for (auto it:root->positions){
+            //read data            
+            string data;
+            file.seekg(it);
+            getline(file,data);
+            cout<<data<<" ";
+        }
+        cout<<endl;
+    }
+    for (int i=0;i<3;i++){
+        dfs(root->children[i]);
+    }
+}
+
+void TernarySearchTree::find_next(string name){
+    auto aux = root->find(name,0,this->filename);
+    dfs(aux);
+
+}
 
 
 void TernarySearchTree::print(){
